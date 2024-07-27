@@ -1,0 +1,41 @@
+{
+	"schemaVersion": 1,
+	"id": "firespread",
+	"version": "${version}",
+	"name": "Firestarter",
+	"description": "Makes fire spread more aggressive and much more likely to completely level wooden structures, or forests...",
+	"authors": [
+		"Kadulous"
+	],
+	"contact": {
+		"homepage": "",
+		"sources": ""
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/firespread/icon.png",
+	"environment": "*",
+	"accessWidener": "firespread.accesswidener",
+	"entrypoints": {
+		"main": [
+			"firespread.modid.Firespread"
+		],
+		"client": [
+			"firespread.modid.FirespreadClient"
+		]
+	},
+	"mixins": [
+		"firespread.mixins.json",
+		{
+			"config": "firespread.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.15.11",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+	}
+}
