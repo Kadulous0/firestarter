@@ -1,5 +1,6 @@
 package firespread.modid.mixin;
 
+import firespread.modid.Firespread;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FireBlock;
@@ -37,19 +38,18 @@ public abstract class FireSpreadMixin {
     protected static int getFireTickDelay(Random random) { return 30 + random.nextInt(10); }
 
     @Inject(method = "getBurnChance(Lnet/minecraft/world/WorldView;Lnet/minecraft/util/math/BlockPos;)I", at = @At("RETURN"), cancellable = true)
-    private void newBurnChance(CallbackInfoReturnable<Integer> cir) {
-        int add = 0;
-        int multiplier = 1;
-        cir.setReturnValue((cir.getReturnValue() * multiplier) + add);
+    private void mixinBurnChance(CallbackInfoReturnable<Integer> cir) {
+        float multiplier = Firespread.config.burnChanceMultiplier();
+        cir.setReturnValue(Math.round(((float) cir.getReturnValue()) * multiplier));
     }
 
     @Inject(method = "getSpreadChance", at = @At("RETURN"), cancellable = true)
-    private void newFireSpread(CallbackInfoReturnable<Integer> cir) {
-        int add = 0;
-        int multiplier = 3;
-        cir.setReturnValue((cir.getReturnValue() * multiplier) + add);
+    private void mixinFireSpread(CallbackInfoReturnable<Integer> cir) {
+        float multiplier = Firespread.config.fireSpreadMultiplier();
+        cir.setReturnValue(Math.round(((float) cir.getReturnValue()) * multiplier));
     }
 
+    // REPLACE
     @Inject(method = "scheduledTick", at = @At("HEAD"), cancellable = true)
     private void modifyScheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
         world.scheduleBlockTick(pos, (Block) (Object) this, getFireTickDelay(world.random));
@@ -95,9 +95,12 @@ public abstract class FireSpreadMixin {
                 this.trySpreadingFire(world, pos.south(), 300 + k, random, i);
                 BlockPos.Mutable mutable = new BlockPos.Mutable();
 
-                for (int l = -2; l <= 2; ++l) {
-                    for (int m = -2; m <= 2; ++m) {
-                        for (int n = -2; n <= 5; ++n) {
+                int horz = Firespread.config.spreadDistanceHorizontal();
+                int up = Firespread.config.spreadDistanceVerticalUp();
+                int down = Firespread.config.spreadDistanceVerticalDown();
+                for (int l = -horz; l <= horz; ++l) {
+                    for (int m = -horz; m <= horz; ++m) {
+                        for (int n = -down; n <= up; ++n) {
                             if (l != 0 || n != 0 || m != 0) {
                                 int o = 100;
                                 if (n > 1) {
@@ -113,7 +116,7 @@ public abstract class FireSpreadMixin {
                                     }
 
                                     if (q > 0 && random.nextInt(o) <= q && (!world.isRaining() || !this.isRainingAround(world, mutable) || (this.isRainingAround(world, mutable) && random.nextFloat() < 0.05F))) {
-                                        int r = Math.min(15, i + random.nextInt(10) / 9);
+                                        int r = Math.min(15, i + random.nextInt(5) / 4);
                                         world.setBlockState(mutable, this.getStateWithAge(world, mutable, r), 3);
                                     }
                                 }
@@ -126,13 +129,36 @@ public abstract class FireSpreadMixin {
         ci.cancel(); // Cancel the original method execution
     }
 
+    /*/
+    private void trySpreadingFire(World world, BlockPos pos, int spreadFactor, Random random, int currentAge) {
+        ++ currentAge = 0
+        int i = this.getSpreadChance(world.getBlockState(pos));
+        if (random.nextInt(spreadFactor) < i) {
+            BlockState blockState = world.getBlockState(pos);
+            if (random.nextInt(currentAge + 10) < 5 && !world.hasRain(pos)) {
+                int j = Math.min(currentAge + random.nextInt(5) / 4, 15);
+                world.setBlockState(pos, this.getStateWithAge(world, pos, j), 3);
+            } else {
+                world.removeBlock(pos, false);
+            }
+
+            Block block = blockState.getBlock();
+            if (block instanceof TntBlock) {
+                TntBlock.primeTnt(world, pos);
+            }
+        }
+
+    }
+     */
+
+    // REPLACE
     @Inject(method = "trySpreadingFire", at = @At("HEAD"), cancellable = true)
     private void modifiedTrySpreadingFire(World world, BlockPos pos, int spreadFactor, Random random, int currentAge, CallbackInfo ci) {
         // Custom spread logic
         if (random.nextInt(spreadFactor) < this.getSpreadChance(world.getBlockState(pos))) {
             BlockState blockState = world.getBlockState(pos);
             if (random.nextInt(10) < 5 && (!world.hasRain(pos) || (world.hasRain(pos) && random.nextFloat() < 0.1F))) {
-                int j = Math.min(currentAge + random.nextInt(10) / 9, 15);
+                int j = Math.min(currentAge + random.nextInt(5) / 4, 15);
                 world.setBlockState(pos, this.getStateWithAge(world, pos, j), 3);
             } else {
                 world.removeBlock(pos, false);

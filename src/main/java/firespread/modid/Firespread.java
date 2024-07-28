@@ -2,26 +2,38 @@ package firespread.modid;
 
 import net.fabricmc.api.ModInitializer;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.util.Identifier;
+import java.io.InputStream;
+import java.nio.file.StandardCopyOption;
+import java.nio.file.Files;
+
+import com.google.gson.Gson;
+
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import static firespread.modid.Constants.*;
 
 public class Firespread implements ModInitializer {
-	// This logger is used to write text to the console and the log file.
-	// It is considered best practice to use your mod id as the logger's name.
-	// That way, it's clear which mod wrote info, warnings, and errors.
-    public static final Logger LOGGER = LoggerFactory.getLogger("firespread");
+    public static final Logger LOGGER = LOG;
+	public static FirespreadConfig config;
 
 	@Override
 	public void onInitialize() {
-		// This code runs as soon as Minecraft is in a mod-load-ready state.
-		// However, some things (like resources) may still be uninitialized.
-		// Proceed with mild caution.
-		LOGGER.info("Loaded the 'Wild Fires' mod successfully");
+		LOGGER.info(MOD_NAME + " initializing");
+		if (!CONFIG_FILE_PATH.toFile().exists()) {
+			LOGGER.info("No config for " + MOD_NAME + " exists, creating copy of default config.");
+			try (InputStream in = Firespread.class.getClassLoader().getResourceAsStream(CONFIG_RESOURCE_NAME)) {
+				if (in == null) throw new IllegalStateException("Failed to load " + MOD_NAME + "'s default config \"" + CONFIG_RESOURCE_NAME +"\"");
+				Files.createDirectories(CONFIG_FILE_PATH);
+				Files.copy(in, CONFIG_FILE_PATH, StandardCopyOption.REPLACE_EXISTING);
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		}
+		try (final InputStream in = Files.newInputStream(CONFIG_FILE_PATH)) {
+			config = new Gson().fromJson(new java.io.InputStreamReader(in), FirespreadConfig.class);
+		} catch (Exception e) {
+			throw new RuntimeException(MOD_NAME + "'s config file is malformed! If you don't know what's causing this, delete the config file and restart the game.");
+		}
+		LOGGER.info(MOD_NAME + " initialized");
 	}
 }

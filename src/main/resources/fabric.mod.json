@@ -8,8 +8,9 @@
 		"Kadulous"
 	],
 	"contact": {
-		"homepage": "",
-		"sources": ""
+		"homepage": "https://modrinth.com/project/firestarter",
+		"sources": "https://github.com/Kadulous0/firestarter",
+		"issues": "https://github.com/Kadulous0/firestarter/issues"
 	},
 	"license": "CC0-1.0",
 	"icon": "assets/firespread/icon.png",
