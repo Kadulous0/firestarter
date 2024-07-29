@@ -8,11 +8,11 @@
 
   // spread multiplier for fire spreading
   // [float, (ex. 1, 0.75, 1.5, ...)]
-  "fireSpreadMultiplier": 1.25,  // default = 1.25, vanilla = 1
+  "fireSpreadMultiplier": 1,  // default/vanilla = 1
 
   // spread distances for horizontal, vertical-up, and vertical-down
   // [integer, >= 1, (ie, 1, 2, 3, ...)]
-  "spreadDistanceHorizontal": 2,  // default = 2, vanilla = 1
-  "spreadDistanceVerticalUp": 5,  // default = 5, vanilla = 4
-  "spreadDistanceVerticalDown": 2 // default = 2, vanilla = 1
+  "spreadDistanceHorizontal": 1,  // default/vanilla = 1
+  "spreadDistanceVerticalUp": 4,  // default/vanilla = 4
+  "spreadDistanceVerticalDown": 1 // default/vanilla = 1
 }
