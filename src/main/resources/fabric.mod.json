@@ -3,7 +3,7 @@
 	"id": "firespread",
 	"version": "${version}",
 	"name": "Firestarter",
-	"description": "Makes fire spread more aggressive and much more likely to completely level wooden structures, or forests...",
+	"description": "Allows fire to spread longer with configuration options available",
 	"authors": [
 		"Kadulous"
 	],

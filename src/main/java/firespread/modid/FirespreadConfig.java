@@ -2,25 +2,38 @@ package firespread.modid;
 
 public class FirespreadConfig {
 
+    public boolean fireSlows;
+    public boolean fireSlows() { return this.fireSlows; }
+
+    public int fakeAge;
+    public int fakeAge() { return fakeAge; }
+
     public float burnChanceMultiplier;
     public float burnChanceMultiplier() { return this.burnChanceMultiplier; }
-    public float fireSpreadMultiplier;
-    public float fireSpreadMultiplier() { return this.fireSpreadMultiplier; }
+    public float spreadChanceMultiplier;
+    public float spreadChanceMultiplier() { return this.spreadChanceMultiplier; }
 
     public int spreadDistanceHorizontal;
     public int spreadDistanceHorizontal() { return this.spreadDistanceHorizontal; }
-    public int spreadDistanceVerticalUp;
-    public int spreadDistanceVerticalUp() { return this.spreadDistanceVerticalUp; }
-    public int spreadDistanceVerticalDown;
-    public int spreadDistanceVerticalDown() { return this.spreadDistanceVerticalDown; }
+    public int spreadDistanceUp;
+    public int spreadDistanceUp() { return this.spreadDistanceUp; }
+    public int spreadDistanceDown;
+    public int spreadDistanceDown() { return this.spreadDistanceDown; }
 
-    public FirespreadConfig(float burnChanceMultiplier, float fireSpreadMultiplier,
-                            int spreadDistanceHorizontal, int spreadDistanceVerticalUp, int spreadDistanceVerticalDown)
+    public FirespreadConfig(boolean fireSlows,
+                            int fakeAge,
+                            float burnChanceMultiplier, float fireSpreadMultiplier,
+                            int spreadDistanceHorizontal, int spreadDistanceUp, int spreadDistanceDown)
     {
+        this.fireSlows = fireSlows;
+
+        this.fakeAge = fakeAge;
+
         this.burnChanceMultiplier = burnChanceMultiplier;
-        this.fireSpreadMultiplier = fireSpreadMultiplier;
+        this.spreadChanceMultiplier = fireSpreadMultiplier;
+
         this.spreadDistanceHorizontal = spreadDistanceHorizontal;
-        this.spreadDistanceVerticalUp = spreadDistanceVerticalUp;
-        this.spreadDistanceVerticalDown = spreadDistanceVerticalDown;
+        this.spreadDistanceUp = spreadDistanceUp;
+        this.spreadDistanceDown = spreadDistanceDown;
     }
 }
