@@ -1,0 +1,13 @@
+accessWidener   v2  named
+
+# makes getBurnChance() public
+accessible  method  net/minecraft/block/FireBlock   getBurnChance       (Lnet/minecraft/world/WorldView;Lnet/minecraft/util/math/BlockPos;)I
+
+# makes getSpreadChance() public
+accessible  method  net/minecraft/block/FireBlock   getSpreadChance     (Lnet/minecraft/block/BlockState;)I
+
+# makes scheduledTick() public
+accessible  method  net/minecraft/block/FireBlock   scheduledTick       (Lnet/minecraft/block/BlockState;Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/random/Random;)V
+
+# makes trySpreadingFire() public
+accessible  method  net/minecraft/block/FireBlock   trySpreadingFire    (Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;ILnet/minecraft/util/math/random/Random;I)V

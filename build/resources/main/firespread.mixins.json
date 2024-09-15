@@ -1,0 +1,13 @@
+{
+	"required": true,
+	"package": "firespread.modid.mixin",
+	"compatibilityLevel": "JAVA_17",
+	"mixins": [
+		"FireSpreadMixin"
+	],
+	"client": [],
+	"server": [],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

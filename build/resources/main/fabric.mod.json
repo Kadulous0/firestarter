@@ -1,0 +1,41 @@
+{
+	"schemaVersion": 1,
+	"id": "firespread",
+	"version": "1.0.0",
+	"name": "Firestarter",
+	"description": "Allows fire to spread longer with configuration options available",
+	"authors": [
+		"Kadulous"
+	],
+	"contact": {
+		"homepage": "https://modrinth.com/project/firestarter",
+		"sources": "https://github.com/Kadulous0/firestarter",
+		"issues": "https://github.com/Kadulous0/firestarter/issues"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/firespread/icon.png",
+	"environment": "*",
+	"accessWidener": "firespread.accesswidener",
+	"entrypoints": {
+		"main": [
+			"firespread.modid.Firespread"
+		],
+		"client": [
+			"firespread.modid.FirespreadClient"
+		]
+	},
+	"mixins": [
+		"firespread.mixins.json",
+		{
+			"config": "firespread.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.15.0",
+		"minecraft": "~1.20",
+		"java": ">=17"
+	},
+	"suggests": {
+	}
+}
