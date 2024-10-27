@@ -9,7 +9,7 @@
 
   // age that fire will act as if above is false
   // [int, (ex. 1, 2, 4, ...)]
-  "fakeAge": 4,                   // default = 4
+  "fakeAge": 15,                   // default = 15
 
   // chance multiplier that a block will burn
   // [float, (ex. 1, 0.75, 1.5, ...)]
@@ -21,7 +21,7 @@
 
   // spread distance for fire blocks
   // [int, (ex. 1, 2, 4, ...)]
-  "spreadDistanceHorizontal": 1,  // default/vanilla = 1
-  "spreadDistanceUp": 4,          // default/vanilla = 1
+  "spreadDistanceHorizontal": 2,  // default = 2, vanilla = 1
+  "spreadDistanceUp": 4,          // default/vanilla = 4
   "spreadDistanceDown": 1         // default/vanilla = 1
 }

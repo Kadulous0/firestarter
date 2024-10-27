@@ -3,7 +3,8 @@
 	"package": "firespread.modid.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-		"FireSpreadMixin"
+		"FireSpreadMixin",
+		"RemoveSurfaceLavaMixin"
 	],
 	"client": [],
 	"server": [],
