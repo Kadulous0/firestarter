@@ -1,0 +1,27 @@
+{
+  //        --- NOTICE ---
+  // ANY CHANGE REQUIRES GAME RESTART.
+
+  // enable or disable fire slowing with age
+  // false == fire does not slow with age
+  // [boolean, true or false]
+  "fireSlows": false,             // default = false, vanilla = true
+
+  // age that fire will act as if above is false
+  // [int, (ex. 1, 2, 4, ...)]
+  "fakeAge": 4,                   // default = 4
+
+  // chance multiplier that a block will burn
+  // [float, (ex. 1, 0.75, 1.5, ...)]
+  "burnChanceMultiplier": 1,      // default/vanilla = 1
+
+  // spread multiplier for fire spreading
+  // [float, (ex. 1, 0.75, 1.5, ...)]
+  "spreadChanceMultiplier": 1,    // default/vanilla = 1
+
+  // spread distance for fire blocks
+  // [int, (ex. 1, 2, 4, ...)]
+  "spreadDistanceHorizontal": 1,  // default/vanilla = 1
+  "spreadDistanceUp": 4,          // default/vanilla = 1
+  "spreadDistanceDown": 1         // default/vanilla = 1
+}
