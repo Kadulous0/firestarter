@@ -16,5 +16,5 @@ I recommend deleting this "firespread.json5" file if you had the mod installed b
 
 ## WIP features
 - ~~Configuration to allow users to change spread rules and mechanics easily.~~ (added in v0.1.0)
+- ~~Disable fire pools from spawning to reduce number of natural wildfires.~~ (added in v2.0.0)
 - Biome dependant spread rules
-- Disable fire pools from spawning to reduce number of natural wildfires.
